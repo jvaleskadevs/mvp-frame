@@ -12,7 +12,7 @@ const frameMetadata = getFrameMetadata({
     },
   ],
   image: {
-    src: `${NEXT_PUBLIC_URL}/all_the_usdc.png`,
+    src: `${NEXT_PUBLIC_URL}/all_usdc_sent.png`,
     aspectRatio: '1:1',
   },
   input: {
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'mvp',
     description: 'mvp agent is an experimental autonomous agent that can operate premier league (epl) games in polymarket',
-    images: [`${NEXT_PUBLIC_URL}/all_the_usdc.png`],
+    images: [`${NEXT_PUBLIC_URL}/all_usdc_sent.png`],
   },
   other: {
     ...frameMetadata,
