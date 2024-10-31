@@ -20,7 +20,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
   const data = encodeFunctionData({
     abi: USDCABI,
     functionName: 'approve',
-    args: [AgentProxyWalletAddr, BigInt(state.amount)]
+    args: [AgentProxyWalletAddr, BigInt(state.amount * 10 ** 6)]
   });
 
   const txData: FrameTransactionResponse = {

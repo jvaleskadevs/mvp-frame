@@ -8,12 +8,12 @@ const frameMetadata = getFrameMetadata({
       action: 'tx',
       label: 'send usdc',
       target: `${NEXT_PUBLIC_URL}/api/approve-tx`,
-      postUrl: `${NEXT_PUBLIC_URL}/api/approve-tx`,
+      postUrl: `${NEXT_PUBLIC_URL}/api/approve`,
     },
   ],
   image: {
     src: `${NEXT_PUBLIC_URL}/all_usdc_sent.png`,
-    aspectRatio: '1:1',
+    aspectRatio: '1.91:1',
   },
   input: {
     text: 'type the amount..',
