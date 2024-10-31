@@ -9,11 +9,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   if (!isValid) {
     return new NextResponse('Message not valid', { status: 500 });
   }
-  
-  let state = {
-    amount: +message.input || 0
-  }
-  if (!state.amount) return new NextResponse('Amount is not valid', { status: 500 }); 
 
   return new NextResponse(
     getFrameHtmlResponse({
@@ -29,8 +24,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         src: `${NEXT_PUBLIC_URL}/approved.png`,
       },
       postUrl: `${NEXT_PUBLIC_URL}/api/approved`,
-      state: {
-        amount: state.amount
+      input: {
+        text: 'type the amount..',
       }
     })
   );

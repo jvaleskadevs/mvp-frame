@@ -13,19 +13,14 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
   if (!isValid) return new NextResponse('Message not valid', { status: 500 });  
 
   let state = {
-    amount: 0,
-  };
-  try {
-    state = JSON.parse(decodeURIComponent(message.state?.serialized));
-  } catch (e) {
-    console.error(e);
+    amount: +message.input || 0
   }
-  if (!state.amount) return new NextResponse('Amount is not valid', { status: 500 });  
+  if (!state.amount) return new NextResponse('Amount is not valid', { status: 500 });   
 
   const data = encodeFunctionData({
     abi: AgentProxyWalletABI,
     functionName: 'deposit',
-    args: [BigInt(state.amount)]
+    args: [BigInt(state.amount * 10 ** 6)]
   });
 
   const txData: FrameTransactionResponse = {
