@@ -5,32 +5,29 @@ import { NEXT_PUBLIC_URL } from './config';
 const frameMetadata = getFrameMetadata({
   buttons: [
     {
-      label: 'Story time',
-    },
-    {
       action: 'tx',
-      label: 'Send Base Sepolia',
-      target: `${NEXT_PUBLIC_URL}/api/tx`,
-      postUrl: `${NEXT_PUBLIC_URL}/api/tx-success`,
+      label: 'send usdc',
+      target: `${NEXT_PUBLIC_URL}/api/approve-tx`,
+      postUrl: `${NEXT_PUBLIC_URL}/api/approve-tx`,
     },
   ],
   image: {
-    src: `${NEXT_PUBLIC_URL}/park-3.png`,
+    src: `${NEXT_PUBLIC_URL}/all_the_usdc.png`,
     aspectRatio: '1:1',
   },
   input: {
-    text: 'Tell me a story',
+    text: 'type the amount..',
   },
-  postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
+  postUrl: `${NEXT_PUBLIC_URL}/api/approve-tx`,
 });
 
 export const metadata: Metadata = {
-  title: 'zizzamia.xyz',
-  description: 'LFG',
+  title: 'mvp',
+  description: 'mvp agent is an experimental autonomous agent that can operate premier league (epl) games in polymarket',
   openGraph: {
-    title: 'zizzamia.xyz',
-    description: 'LFG',
-    images: [`${NEXT_PUBLIC_URL}/park-1.png`],
+    title: 'mvp',
+    description: 'mvp agent is an experimental autonomous agent that can operate premier league (epl) games in polymarket',
+    images: [`${NEXT_PUBLIC_URL}/all_the_usdc.png`],
   },
   other: {
     ...frameMetadata,
@@ -40,7 +37,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <h1>zizzamia.xyz</h1>
+      <h1>mvp is farcaster frame</h1>
     </>
   );
 }

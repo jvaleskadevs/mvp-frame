@@ -2,8 +2,8 @@ import { FrameRequest, getFrameMessage } from '@coinbase/onchainkit/frame';
 import { NextRequest, NextResponse } from 'next/server';
 import { encodeFunctionData } from 'viem';
 import { polygon } from 'viem/chains';
-import { AgentProxyWalletABI } from '../../_contracts/AgentProxyWalletABI';
-import { AgentProxyWalletAddr } from '../../config';
+import USDCABI from '../../_contracts/USDCABI';
+import { AgentProxyWalletAddr, USDCAddr } from '../../config';
 import type { FrameTransactionResponse } from '@coinbase/onchainkit/frame';
 
 async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
@@ -13,19 +13,14 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
   if (!isValid) return new NextResponse('Message not valid', { status: 500 });  
 
   let state = {
-    amount: 0,
-  };
-  try {
-    state = JSON.parse(decodeURIComponent(message.state?.serialized));
-  } catch (e) {
-    console.error(e);
+    amount: +message.input || 0
   }
-  if (!state.amount) return new NextResponse('Amount is not valid', { status: 500 });  
+  if (!state.amount) return new NextResponse('Amount is not valid', { status: 500 }); 
 
   const data = encodeFunctionData({
-    abi: AgentProxyWalletABI,
-    functionName: 'deposit',
-    args: [BigInt(state.amount)]
+    abi: USDCABI,
+    functionName: 'approve',
+    args: [AgentProxyWalletAddr, BigInt(state.amount)]
   });
 
   const txData: FrameTransactionResponse = {
@@ -34,7 +29,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
     params: {
       abi: [],
       data,
-      to: AgentProxyWalletAddr,
+      to: USDCAddr,
       value: '0'
     }
   };
